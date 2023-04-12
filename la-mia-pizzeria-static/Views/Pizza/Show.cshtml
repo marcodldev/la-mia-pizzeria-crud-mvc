@@ -1,0 +1,49 @@
+﻿@model Pizza
+@{
+ 
+    Layout = "LayoutCustom";
+    var pizza = Model;
+}
+
+<div>
+
+    <img src="@pizza.ImgUrl" class="card-img-top" alt="@pizza.Name">
+
+    <div class="p-3"><p>Nome: @pizza.Name</p></div>
+
+    <div class="p-1"><p>Descrizione: @pizza.Description</p></div>
+
+    <span> <p>@pizza.Prezzo €</p> </span>
+
+</div>
+ 
+<div>
+  @*  <a class="btn btn-danger btn-lg" href="@Url.Action("Edit","Pizza", new{Id = @pizza.Id})">Modifica</a> NON FUNZIONA *@
+
+   <div class="p-3">
+       <form asp-controller="Pizza" asp-action="Delete" asp-route-id="@pizza.Id" method="post">
+           @Html.AntiForgeryToken()
+            <button type="submit" class="btn btn-danger btn-lg">
+               Elimina 
+           </button>
+
+       </form>
+   </div>
+
+    <div class="p-3">
+        <form asp-controller="Pizza" asp-action="Update" asp-route-id="@pizza.Id" method="get">
+            @Html.AntiForgeryToken()
+            <button type="submit" class="btn btn-danger btn-lg">
+                Modifica
+            </button>
+
+        </form>
+    </div>
+</div>
+
+<style>
+
+    body {
+        color: white;
+    }
+</style>
