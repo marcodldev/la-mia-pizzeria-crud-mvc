@@ -7,6 +7,7 @@ namespace la_mia_pizzeria_static.Models
     public class PizzaContext : DbContext
     {
         public DbSet<Pizza> Pizze { get; set; }
+        public DbSet<Categorie> Categorie { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -57,8 +58,31 @@ namespace la_mia_pizzeria_static.Models
 
                Pizze.AddRange(seed);
 
+             }
+
+                if (!Categorie.Any())
+                {
+                    var seed = new Categorie[]
+                    {
+                        new()
+                        {
+                            Nome = "Vegetariana",
+                        },
+                        new()
+                        {
+                            Nome = "Piccante"
+                        },
+                        new()
+                        {
+                            Nome = "DiMare"
+                        }
+                    };
+
+                    Categorie.AddRange(seed);
+                }
+
                 SaveChanges();
-            }
+            
         }
     }
 }

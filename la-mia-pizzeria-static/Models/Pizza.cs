@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.Identity.Client;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace la_mia_pizzeria_static.Models
@@ -31,5 +32,10 @@ namespace la_mia_pizzeria_static.Models
 
         [Required(ErrorMessage = "Il prezzo è obbligatorio")]
         public double Prezzo { get; set; }
+
+
+
+        public int? CategorieId { get; set; }
+        public Categorie? Categorie { get; set; }
     }
 }
