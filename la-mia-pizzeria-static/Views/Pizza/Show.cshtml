@@ -13,6 +13,24 @@
 
     <div class="p-1"><p>Descrizione: @pizza.Description</p></div>
 
+    <div>
+        <p>
+            Sport: 
+
+        </p>
+        <p>
+            @if (pizza.Categorie != null)
+            {
+                @pizza.Categorie.Nome
+            }
+            else
+            {
+                <span>Nessuna Categoria</span>
+            }
+
+        </p>
+    </div>
+
     <span> <p>@pizza.Prezzo €</p> </span>
 
 </div>

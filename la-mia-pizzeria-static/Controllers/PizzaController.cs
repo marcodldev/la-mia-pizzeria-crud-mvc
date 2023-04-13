@@ -1,5 +1,6 @@
 ﻿using la_mia_pizzeria_static.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System.Runtime.CompilerServices;
 
 namespace la_mia_pizzeria_static.Controllers
@@ -27,14 +28,16 @@ namespace la_mia_pizzeria_static.Controllers
         {
             using var ctx = new PizzaContext();
 
-            var pizze = ctx.Pizze.SingleOrDefault(p => p.Id == Id);
+            //var pizze = ctx.Pizze.SingleOrDefault(p => p.Id == Id);
 
-            if (pizze == null)
+            Pizza pizzaTrovata = ctx.Pizze.Where(pizza => pizza.Id == Id).Include(pizza => pizza.Categorie).FirstOrDefault();
+
+            if (pizzaTrovata == null)
             {
-                return NotFound($"Pizza {Id} non trovata");
+                return NotFound($"form {Id} non trovata");
             }
 
-            return View(pizze);
+            return View(pizzaTrovata);
         }
 
         [HttpPost]
@@ -103,21 +106,36 @@ namespace la_mia_pizzeria_static.Controllers
                 }
                 else
                 {
-                   
+                    List<Categorie> categorie = ctx.Categorie.ToList();
+
+
+                    PizzaFormModel model = new PizzaFormModel();
+                    model.Pizza = pizzaEdit;
+                    model.ListaCategorie = categorie;
                     
-                    return View("Edit",pizzaEdit);
+                    return View("Edit", model);
                 }
             }
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Update(int Id, Pizza pizza)
+        public IActionResult Update(int Id, PizzaFormModel form)
         {
 
             if (!ModelState.IsValid)
             {
-                return View("Edit", pizza);
+                using (PizzaContext ctx = new PizzaContext())
+                {
+                    List<Categorie> categorie = ctx.Categorie.ToList();
+
+                    form.Pizza = ctx.Pizze.Where(pizza => pizza.Id == Id).FirstOrDefault();
+                    form.ListaCategorie = categorie;
+
+                    return View("Edit", form);
+                }
+
+               
             }
             string url = "/img/";
 
@@ -128,12 +146,13 @@ namespace la_mia_pizzeria_static.Controllers
 
                 if (pizzaEdit != null)
                 {
-                    pizzaEdit.Name = pizza.Name;
-                    pizzaEdit.Description = pizza.Description;
-                    pizzaEdit.ImgUrl = url+pizza.ImgUrl;
-                    pizzaEdit.Prezzo = pizza.Prezzo;
-
-                     ctx.SaveChanges();
+                    pizzaEdit.Name = form.Pizza.Name;
+                    pizzaEdit.Description = form.Pizza.Description;
+                    pizzaEdit.ImgUrl = url+form.Pizza.ImgUrl;
+                    pizzaEdit.Prezzo = form.Pizza.Prezzo;
+                    pizzaEdit.CategorieId = form.Pizza.CategorieId;
+                   
+                    ctx.SaveChanges();
 
                       return RedirectToAction("Index");
                 }
