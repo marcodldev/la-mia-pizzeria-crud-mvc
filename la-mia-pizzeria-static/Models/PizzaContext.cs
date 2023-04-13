@@ -27,10 +27,11 @@ namespace la_mia_pizzeria_static.Models
 
                 new Pizza
                 {
-                Name =  "Pizza Margherita",
-                Description = " La pizza Margherita è la tipica pizza napoletana, condita con pomodoro, mozzarella, basilico fresco, sale e olio; è, assieme alla pizza marinara, la più popolare pizza italiana.\r\n\r\n                                Rappresenta sicuramente il simbolo per antonomasia del patrimonio culturale e culinario italiano, diffusa per la sua fama in tutto il mondo.",
-                ImgUrl = path+"Pizza_Margherita_stu_spivack.jpg",
-                Prezzo = 12.90,
+                    Name =  "Pizza Margherita",
+                    Description = " La pizza Margherita è la tipica pizza napoletana, condita con pomodoro, mozzarella, basilico fresco, sale e olio; è, assieme alla pizza marinara, la più popolare pizza italiana.\r\n\r\n                                Rappresenta sicuramente il simbolo per antonomasia del patrimonio culturale e culinario italiano, diffusa per la sua fama in tutto il mondo.",
+                    ImgUrl = path+"Pizza_Margherita_stu_spivack.jpg",
+                    Prezzo = 12.90,
+                    //Categorie = new Categorie() { Nome = "Vegetariana"}
                 },
 
                 new Pizza
@@ -39,6 +40,7 @@ namespace la_mia_pizzeria_static.Models
                 Description = " La pizza capricciosa è una pizza tipica della cucina italiana caratterizzata da un condimento di pomodoro, mozzarella, prosciutto cotto (o spesso anche crudo), funghi (di solito champignon), olive verdi e nere, e carciofini e spesso uova. Sebbene a volte abbia gli stessi ingredienti della pizza alle quattro stagioni, \r\n                                la capricciosa presenta condimenti tutti insieme sparsi e non divisi in quattro spicchi. Risulta inventata nell'omonimo ristorante di Roma nel 1937.",
                 ImgUrl =path+"1920px-Pizza_capricciosa.jpg",
                 Prezzo = 11.90,
+                //Categorie = new Categorie() { Nome = "Vegetariana"}
                 },
 
                 new Pizza

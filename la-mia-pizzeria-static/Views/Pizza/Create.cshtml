@@ -1,4 +1,4 @@
-﻿@model Pizza
+﻿@model PizzaFormModel
 @{
     Layout = "LayoutCustom";
 
@@ -13,24 +13,44 @@
         @Html.AntiForgeryToken()
 
         <div class="form-group p-2">
-            <label asp-for="Name" class="control-label text-light">Nome</label>
-            <input asp-for="Name" class="form-control " />
-            <span asp-validation-for="Name" class="text-danger"></span>
+            <label asp-for="Pizza.Name" class="control-label text-light">Nome</label>
+            <input asp-for="Pizza.Name" class="form-control " />
+            <span asp-validation-for="Pizza.Name" class="text-danger"></span>
         </div>
         <div class="form-group p-2">
-            <label asp-for="Description" class="control-label text-light">Descrizione</label>
-            <textarea asp-for="Description" class="form-control "></textarea>
-            <span asp-validation-for="Description" class="text-danger"></span>
+            <label asp-for="Pizza.Description" class="control-label text-light">Descrizione</label>
+            <textarea asp-for="Pizza.Description" class="form-control "></textarea>
+            <span asp-validation-for="Pizza.Description" class="text-danger"></span>
         </div>
         <div class="form-group p-2">
-            <label asp-for="ImgUrl" class="control-label text-light">Scegli l'immagine</label>
-            <input asp-for="ImgUrl" type="file" class="form-control-file " />
-            <span asp-validation-for="ImgUrl" class="text-danger"></span>
+            <label asp-for="Pizza.ImgUrl" class="control-label text-light">Scegli l'immagine</label>
+            <input asp-for="Pizza.ImgUrl" type="file" class="form-control-file " />
+            <span asp-validation-for="Pizza.ImgUrl" class="text-danger"></span>
         </div>
+
+        <p class="text-light">Categoria:</p>
+        <select asp-for="Pizza.CategorieId" rows="5" class="d-block w-100">
+            <option value=""></option>
+             @if (pizze != null){
+                    @foreach(Categorie categoria in pizze.ListaCategorie)
+                    {
+                        @if (pizze.Pizza.CategorieId == categoria.Id)
+                        {
+                            <option value="@categoria.Id" selected>@categoria.Nome</option>
+                        }
+                        else
+                        {
+                            <option value="@categoria.Id">@categoria.Nome</option>
+                        }
+                    }
+             }
+        </select>
+
+
         <div class="form-group p-2">
-            <label asp-for="Prezzo" class="control-label text-light">Prezzo</label>
-            <input asp-for="Prezzo" class="form-control" type="number" min="0" step="0.1"  />
-            <span asp-validation-for="Prezzo" class="text-danger"></span>
+            <label asp-for="Pizza.Prezzo" class="control-label text-light">Prezzo</label>
+            <input asp-for="Pizza.Prezzo" class="form-control" type="number" min="0" step="0.1" />
+            <span asp-validation-for="Pizza.Prezzo" class="text-danger"></span>
         </div>
 
         <div class="form-group p-2">

@@ -39,21 +39,29 @@ namespace la_mia_pizzeria_static.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create(Pizza pizza)
+        public IActionResult Create(PizzaFormModel pizza)
         {
 
             if (!ModelState.IsValid)
             {
-                return View("Create", pizza);
+                using (PizzaContext ctx = new PizzaContext())
+                {
+                    List<Categorie> categorie = ctx.Categorie.ToList();
+                    pizza.ListaCategorie = categorie;
+                    return View("Create", pizza);
+                }
+                
             }
 
             using (PizzaContext ctx = new PizzaContext())
             {
                 string url = "/img/";
                 Pizza nuovaPizza = new Pizza();
-                nuovaPizza.Name = pizza.Name;
-                nuovaPizza.Description = pizza.Description;
-                nuovaPizza.ImgUrl = url+pizza.ImgUrl;
+                nuovaPizza.Name = pizza.Pizza.Name;
+                nuovaPizza.Description = pizza.Pizza.Description;
+                nuovaPizza.ImgUrl = url+pizza.Pizza.ImgUrl;
+
+                nuovaPizza.CategorieId = pizza.Pizza.CategorieId;
 
                 ctx.Pizze.Add(nuovaPizza);
                 ctx.SaveChanges();
@@ -65,7 +73,19 @@ namespace la_mia_pizzeria_static.Controllers
         [HttpGet]
         public IActionResult Create()
         {
-            return View("Create");
+            using (PizzaContext ctx = new PizzaContext())
+            {
+                List<Categorie> categories = ctx.Categorie.ToList();
+
+                PizzaFormModel model = new PizzaFormModel();
+                model.Pizza = new Pizza();
+                model.ListaCategorie = categories;
+
+                return View("Create", model);
+
+            }
+
+            
         }
 
 

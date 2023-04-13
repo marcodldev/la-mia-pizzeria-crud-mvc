@@ -8,5 +8,10 @@
         public string Nome { get; set; } = string.Empty;
 
         public List<Pizza> Pizze { get; set; }
+
+        public static implicit operator Categorie(List<Categorie> v)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
