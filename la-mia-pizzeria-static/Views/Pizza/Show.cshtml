@@ -15,10 +15,10 @@
 
     <div>
         <p>
-            Sport: 
+            Categoria: 
 
         </p>
-        <p>
+        <p class="text-red">
             @if (pizza.Categorie != null)
             {
                 @pizza.Categorie.Nome
@@ -26,6 +26,21 @@
             else
             {
                 <span>Nessuna Categoria</span>
+            }
+
+        </p>
+        <p>
+            Ingredienti:
+
+        </p>
+        <p>
+            @foreach(Ingrediente ingrediente in pizza.Ingredienti)
+            {
+                <div>
+                    <label>
+                        @ingrediente.Nome
+                    </label>
+                </div>
             }
 
         </p>
