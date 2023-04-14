@@ -28,6 +28,7 @@ else
                         <div class="card-body">
                             <h5 class="card-title">@pizza.Name</h5>
                             <p class="card-text">@pizza.Description</p>
+                           @* <p class="card-text">@pizza.Categorie.Nome</p>*@
                             <span> <p>@pizza.Prezzo €</p> </span>
                             <a class="btn btn-danger btn-lg" href="@Url.Action("Show","Pizza", new{Id = @pizza.Id})">Dettagli</a>
                            

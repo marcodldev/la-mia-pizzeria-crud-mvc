@@ -47,10 +47,14 @@ namespace la_mia_pizzeria_static.Controllers
 
             if (!ModelState.IsValid)
             {
+               
                 using (PizzaContext ctx = new PizzaContext())
                 {
                     List<Categorie> categorie = ctx.Categorie.ToList();
                     pizza.ListaCategorie = categorie;
+                    //pizza.Pizza = new Pizza();     
+                    //pizza.ListaCategorie = ctx.Categorie.ToList();
+
                     return View("Create", pizza);
                 }
                 
@@ -63,7 +67,7 @@ namespace la_mia_pizzeria_static.Controllers
                 nuovaPizza.Name = pizza.Pizza.Name;
                 nuovaPizza.Description = pizza.Pizza.Description;
                 nuovaPizza.ImgUrl = url+pizza.Pizza.ImgUrl;
-
+                nuovaPizza.Prezzo = pizza.Pizza.Prezzo;
                 nuovaPizza.CategorieId = pizza.Pizza.CategorieId;
 
                 ctx.Pizze.Add(nuovaPizza);
