@@ -2,24 +2,22 @@
 @{
     Layout = "LayoutCustom";
 
-    var pizze = Model;
-
 }
 
 <div class="container">
     <h1 class="text-center text-light">Modifica la tua Paolo-Pizza</h1>
 
-    <form asp-controller="Pizza" asp-action="Update" asp-route-id="@pizze.Pizza.Id" method="post">
+    <form asp-controller="Pizza" asp-action="Update" asp-route-id="@Model.Pizza.Id" method="post">
         @Html.AntiForgeryToken()
 
         <div class="form-group p-2">
             <label asp-for="Pizza.Name" class="control-label text-light">Nome</label>
-            <input asp-for="Pizza.Name" class="form-control" value="@pizze.Pizza.Name" />
+            <input asp-for="Pizza.Name" class="form-control" value="@Model.Pizza.Name" />
             <span asp-validation-for="Pizza.Name" class="text-danger"></span>
         </div>
         <div class="form-group p-2">
             <label asp-for="Pizza.Description" class="control-label text-light">Descrizione</label>
-            <textarea asp-for="Pizza.Description" class="form-control">@pizze.Pizza.Description</textarea>
+            <textarea asp-for="Pizza.Description" class="form-control">@Model.Pizza.Description</textarea>
             <span asp-validation-for="Pizza.Description" class="text-danger"></span>
         </div>
         <div class="form-group p-2">
@@ -30,11 +28,11 @@
         <p class="text-light">Categoria:</p>
         <select asp-for="Pizza.CategorieId" rows="5" class="d-block w-100">
             <option value=""></option>
-            @if (pizze != null && pizze.Pizza != null)
+            @if (Model != null && Model.Pizza != null)
             {
-                @foreach (Categorie categoria in pizze.ListaCategorie)
+                @foreach (Categorie categoria in Model.ListaCategorie)
                 {
-                    @if (pizze.Pizza.CategorieId == categoria.Id)
+                    @if (Model.Pizza.CategorieId == categoria.Id)
                     {
                         <option value="@categoria.Id" selected>@categoria.Nome</option>
                     }
@@ -48,20 +46,22 @@
 
         <div class="my-2 text-light">
             <h2>Modifica gli ingredienti:</h2>
-            @foreach (var ingrediente in pizze.Ingredienti)
+            @*ciclo per tutti gli ingredienti*@
+            @foreach (SelectListItem ingrediente in Model.Ingredienti)
             {
-
+               
                 <div class="form-check">
-                  @*  @if ( pizze.Pizza.Ingredienti == "checked")*@
-                    {
-                     <input class="form-check-input" type="checkbox" name="SelectedIngredienti" value="@ingrediente.Value" id="@ingrediente.Text" >
+                    
+                     <input class="form-check-input" type="checkbox" 
+                     checked="@ingrediente.Selected" name="SelectedIngredienti" 
+                     value="@ingrediente.Value" id="@ingrediente.Text" >
                    
                     <label class="form-check-label" for="@ingrediente.Text">
                         @ingrediente.Text
                     </label>
-                    }
+                    
                 </div>
-                }
+                
           
             }
 
@@ -71,7 +71,7 @@
 
         <div class="form-group p-2">
             <label asp-for="Pizza.Prezzo" class="control-label text-light">Prezzo</label>
-            <input asp-for="Pizza.Prezzo" class="form-control" type="number" min="0" step="0.1" value="@pizze.Pizza.Prezzo" />
+            <input asp-for="Pizza.Prezzo" class="form-control" type="number" min="0" step="0.1" value="@Model.Pizza.Prezzo" />
             <span asp-validation-for="Pizza.Prezzo" class="text-danger"></span>
         </div>
 
