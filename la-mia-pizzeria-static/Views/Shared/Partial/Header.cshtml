@@ -1,6 +1,7 @@
 ﻿
 <div>
-    <h1 class="text-light"> Pizzeria <span class="red">Da Paolo</span> </h1>
+  @*  <h1 class="text-light"> Pizzeria <span class="red">Da Paolo</span> </h1>*@
+    <a class="nav-link @(ViewContext.RouteData.Values["Controller"].ToString() == "Home" && ViewContext.RouteData.Values["Action"].ToString() == "Index" ? "active" : "")" href="@Url.Action("Index", "Home")">Pizzeria <span class="red">Da Paolo</span></a>
 </div>
 
 <div class="text-light">

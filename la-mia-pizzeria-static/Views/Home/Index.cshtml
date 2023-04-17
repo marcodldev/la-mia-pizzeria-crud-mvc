@@ -5,16 +5,35 @@
     
 }
 
-<div>
-    <h2 class="text-light">Home</h2>
+<div class="p-3">
+    <h2 class="text-light text-center fs-1">Benvenuti</h2>
+
+    <div class=" text-light text-center">
+        <img src="~/img/paologo.png" class=" " alt="Paol1">
+
+        <p class="fs-1 p-2">"Non so fare le pizze, però te le posso programmare." cit.</p>
+    </div>
 
 
+    <a class="nav-link  @(ViewContext.RouteData.Values["Controller"].ToString() == "Home" && ViewContext.RouteData.Values["Action"].ToString() == "Index" ? "active" : "")" href="@Url.Action("Index", "Pizza")">Vai alle nostre Paolo-Pizze!</a>
   
 </div>
 
 
 
 <style>
+    .red {
+        color: red !important;
+    }
 
+    p {
+        align-self: center;
+    }
 
+    a {
+        color: red !important;
+        text-align: center;
+    }
+
+       
 </style>
