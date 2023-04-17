@@ -1,10 +1,14 @@
 ﻿
+
+//using Microsoft.AspNet.Identity.EntityFramework;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using DbContext = Microsoft.EntityFrameworkCore.DbContext;
+//using DbContext = Microsoft.EntityFrameworkCore.DbContext;
 
 namespace la_mia_pizzeria_static.Models
 {
-    public class PizzaContext : DbContext
+    public class PizzaContext : IdentityDbContext<IdentityUser>
     {
         public DbSet<Pizza> Pizze { get; set; }
         public DbSet<Categorie> Categorie { get; set; }

@@ -17,7 +17,11 @@ else
 {
    <div>
         <h2 class="text-light">Le nostre Paolo-Pizze:</h2>
-        <a class="btn btn-danger btn-lg p-2 m-4" href="@Url.Action("Create","Pizza")">Inserisci una nuova pizza.</a>
+        @if (User.IsInRole("ADMIN"))
+        {
+           <a class="btn btn-danger btn-lg p-2 m-4" href="@Url.Action("Create","Pizza")">Inserisci una nuova pizza.</a> 
+        }
+        
 
         <div class="row row-cols-1 row-cols-md-2 g-4">
             @foreach (var pizza in pizze)

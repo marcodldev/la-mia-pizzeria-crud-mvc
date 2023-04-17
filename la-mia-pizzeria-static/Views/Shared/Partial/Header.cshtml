@@ -11,6 +11,10 @@
         <li class="nav-item">
             <a class="nav-link @(ViewContext.RouteData.Values["Controller"].ToString() == "ChiSiamo" && ViewContext.RouteData.Values["Action"].ToString() == "Index" ? "active" : "")" href="@Url.Action("Index", "ChiSiamo")">Chi siamo</a>
         </li>
+     @*   <li class="nav-item">
+            <a class="nav-link" aria-current="page" href="@Url.Action("Index","User")">Admin</a>
+        </li>*@
+        <partial name="_LoginPartial" />
     </ul>
 </div>
 
